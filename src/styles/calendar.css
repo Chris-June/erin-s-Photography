@@ -1,0 +1,68 @@
+.booking-calendar {
+  /* Calendar container */
+  background-color: transparent !important;
+  color: #C0C0C0 !important;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.booking-calendar .rbc-toolbar {
+  margin-bottom: 2rem;
+}
+
+.booking-calendar .rbc-toolbar button {
+  color: #C0C0C0;
+  background-color: #3A3A3A;
+  border: 1px solid rgba(184, 115, 51, 0.2);
+  transition: all 0.3s ease;
+}
+
+.booking-calendar .rbc-toolbar button:hover {
+  background-color: #B87333;
+  border-color: #B87333;
+  color: #0B1A36;
+}
+
+.booking-calendar .rbc-toolbar button.rbc-active {
+  background-color: #B87333;
+  border-color: #B87333;
+  color: #0B1A36;
+}
+
+.booking-calendar .rbc-header {
+  padding: 1rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+}
+
+.booking-calendar .rbc-date-cell {
+  padding: 0.5rem;
+  color: #C0C0C0;
+}
+
+.booking-calendar .rbc-today {
+  background-color: rgba(184, 115, 51, 0.1);
+}
+
+.booking-calendar .rbc-off-range-bg {
+  background-color: rgba(58, 58, 58, 0.4);
+}
+
+.booking-calendar .rbc-event {
+  background-color: #B87333;
+  border: none;
+  padding: 0.5rem;
+}
+
+.booking-calendar .rbc-day-bg + .rbc-day-bg,
+.booking-calendar .rbc-month-row + .rbc-month-row {
+  border-color: rgba(192, 192, 192, 0.1);
+}
+
+.booking-calendar .rbc-month-view {
+  border-color: rgba(192, 192, 192, 0.1);
+}
+
+.booking-calendar .rbc-day-bg:hover {
+  background-color: rgba(184, 115, 51, 0.05);
+  cursor: pointer;
+}
