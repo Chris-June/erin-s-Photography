@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import Button from './Button';
 
 interface ParallaxSectionProps {
   image: string;
@@ -8,6 +9,9 @@ interface ParallaxSectionProps {
   height?: string;
   position?: 'left' | 'right' | 'center';
   overlay?: boolean;
+  buttonText?: string;
+  onButtonClick?: () => void;
+  className?: string;
 }
 
 const ParallaxSection = ({
@@ -17,6 +21,9 @@ const ParallaxSection = ({
   height = '100vh',
   position = 'center',
   overlay = true,
+  buttonText,
+  onButtonClick,
+  className = '',
 }: ParallaxSectionProps) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -35,7 +42,11 @@ const ParallaxSection = ({
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.6]);
 
   return (
-    <div ref={ref} className="relative w-full overflow-hidden rounded-2xl my-8 mx-4" style={{ height }}>
+    <div 
+      ref={ref} 
+      className={`relative w-full overflow-hidden rounded-2xl my-8 mx-4 transition-all duration-300 shadow-floating ${className}`} 
+      style={{ height }}
+    >
       <motion.div 
         className="absolute inset-0 z-0"
         style={{ y, scale }}
@@ -51,6 +62,20 @@ const ParallaxSection = ({
           />
         )}
       </motion.div>
+
+      {/* Absolute positioned button at bottom left */}
+      {buttonText && onButtonClick && (
+        <div className="absolute bottom-4 left-4 z-20">
+          <Button 
+            onClick={onButtonClick}
+            variant="soft"
+            size="md"
+            className="shadow-lg"
+          >
+            {buttonText}
+          </Button>
+        </div>
+      )}
 
       {(title || description) && (
         <motion.div

@@ -16,6 +16,13 @@ export default {
         ring: "var(--ring)",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        pastel: {
+          mauve: "#E0CCFF",     // Soft lavender-mauve
+          periwinkle: "#CCCCFF", // Soft blue-purple
+          blush: "#FFD1DC",     // Soft pink
+          sky: "#B0E0E6",       // Soft blue
+          lilac: "#C8A2C8"      // Soft purple
+        },
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
@@ -48,8 +55,49 @@ export default {
       },
       backgroundImage: {
         'gradient-main': 'linear-gradient(to bottom right, #0B1A36, #1A365D, #2A4A7F)',
+        'gradient-mauve-periwinkle': 'linear-gradient(135deg, #E0CCFF 0%, #CCCCFF 100%)',
+        'gradient-blush-sky': 'linear-gradient(135deg, #FFD1DC 0%, #B0E0E6 100%)',
+        'gradient-lilac-mauve': 'linear-gradient(135deg, #C8A2C8 0%, #E0CCFF 100%)',
       },
+      boxShadow: {
+        'floating': '0 20px 45px rgba(0, 0, 0, 0.6), 0 10px 25px rgba(0, 0, 0, 0.5)',
+      },
+      keyframes: {
+        'color-shift': {
+          '0%, 100%': { 
+            backgroundColor: 'var(--color-1)' 
+          },
+          '50%': { 
+            backgroundColor: 'var(--color-2)' 
+          }
+        },
+        'pulse-glow': {
+          '0%, 100%': { 
+            transform: 'scale(1)',
+            opacity: '0.7'
+          },
+          '50%': { 
+            transform: 'scale(1.1)',
+            opacity: '1'
+          }
+        }
+      },
+      animation: {
+        'color-shift': 'color-shift 5s ease infinite',
+        'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss/plugin')(({ addUtilities }) => {
+      const newUtilities = {
+        '.gradient-text': {
+          'background-image': 'linear-gradient(135deg, #E0CCFF, #CCCCFF)',
+          '-webkit-background-clip': 'text',
+          '-webkit-text-fill-color': 'transparent',
+        }
+      }
+      addUtilities(newUtilities)
+    })
+  ]
 }

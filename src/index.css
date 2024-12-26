@@ -6,28 +6,27 @@
 
 @layer base {
   :root {
-    --background: #0B1A36;
-    --foreground: #C0C0C0;
+    --background: #E0CCFF;  /* Soft mauve */
+    --foreground: #3A3A3A;  /* Dark charcoal for contrast */
     
-    --card: #3A3A3A;
-    --card-foreground: #C0C0C0;
+    --card: #CCCCFF;        /* Soft periwinkle */
+    --card-foreground: #3A3A3A;
     
-    --primary: #B87333;
-    --primary-foreground: #C0C0C0;
+    --primary: #B87333;     /* Keeping copper as accent */
+    --primary-foreground: #FFFFFF;
     
-    --secondary: #3A3A3A;
-    --secondary-foreground: #C0C0C0;
+    --secondary: #C8A2C8;   /* Soft lilac */
+    --secondary-foreground: #FFFFFF;
     
-    --muted: #0B1A36;
-    --muted-foreground: #C0C0C0;
+    --muted: #B0E0E6;       /* Soft sky blue */
+    --muted-foreground: #3A3A3A;
     
-    --accent: #B87333;
-    --accent-foreground: #C0C0C0;
+    --accent: #FFD1DC;      /* Soft blush */
+    --accent-foreground: #3A3A3A;
     
-    --border: #3A3A3A;
-    --input: #3A3A3A;
-    --ring: #B87333;
-    --radius: 0.5rem;
+    --border: rgba(200, 162, 200, 0.3);  /* Soft border with lilac */
+    --input: #E0CCFF;       /* Soft input fields */
+    --ring: #CCCCFF;        /* Soft ring color */
   }
 }
 
@@ -58,15 +57,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -75,6 +65,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #E0CCFF 0%, #CCCCFF 100%);
+  color: #3A3A3A;
+  transition: background 5s ease;
 }
 
 h1 {
@@ -181,4 +174,87 @@ html {
     var(--background) 100%
   );
   background-size: 200% 100%;
+}
+
+/* Soft pastel scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E0CCFF;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CCCCFF;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C8A2C8;
+}
+
+@layer components {
+  .rbc-calendar {
+    @apply font-sans text-midnight;
+  }
+
+  .rbc-month-view {
+    @apply bg-gradient-to-br from-pastel-mauve/10 via-pastel-periwinkle/10 to-pastel-lilac/10 
+           rounded-2xl border border-pastel-lilac/20 shadow-floating p-2;
+  }
+
+  .rbc-month-header {
+    @apply bg-gradient-to-br from-pastel-sky/20 to-pastel-periwinkle/20 
+           rounded-t-2xl border-b border-pastel-lilac/30;
+  }
+
+  .rbc-header {
+    @apply text-copper font-serif font-semibold py-3 uppercase tracking-wider text-sm;
+  }
+
+  .rbc-date-cell {
+    @apply text-midnight/80 hover:bg-pastel-sky/10 transition-colors duration-200 
+           rounded-lg p-1 m-0.5 cursor-pointer;
+  }
+
+  .rbc-date-cell.rbc-off-range {
+    @apply text-midnight/30 bg-transparent;
+  }
+
+  .rbc-today {
+    @apply bg-copper/10 font-bold border border-copper/30 rounded-lg;
+  }
+
+  .rbc-event {
+    @apply bg-copper/70 text-white rounded-md border-0 opacity-80 hover:opacity-100 
+           transition-opacity duration-300 font-medium text-sm;
+  }
+
+  .rbc-event-content {
+    @apply truncate;
+  }
+
+  .rbc-button-link {
+    @apply text-copper hover:text-copper/80 transition-colors font-serif;
+  }
+
+  .rbc-toolbar {
+    @apply flex justify-between items-center mb-4 px-4 py-2 
+           bg-pastel-lilac/10 rounded-t-2xl border-b border-pastel-lilac/20;
+  }
+
+  .rbc-toolbar-label {
+    @apply text-copper font-serif font-semibold text-xl;
+  }
+
+  .rbc-btn-group {
+    @apply flex space-x-2;
+  }
+
+  .rbc-btn-group > button {
+    @apply px-3 py-1 rounded-md bg-pastel-sky/20 text-midnight/80 
+           hover:bg-pastel-sky/40 transition-colors;
+  }
 }

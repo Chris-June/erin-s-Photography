@@ -1,23 +1,32 @@
 import { useState } from 'react'
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import { motion } from 'framer-motion'
-import { format, parse, startOfWeek, getDay } from 'date-fns'
+import { format, parse, startOfWeek, getDay, GetDayOptions } from 'date-fns'
+import { enCA } from 'date-fns/locale'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { enCA } from 'date-fns/locale'
+import CustomCalendar from '../components/CustomCalendar'
+
+// Create an interface for your localizer
+interface Localizer {
+  format: (date: Date, formatString: string, options?: { locale?: typeof enCA }) => string;
+  parse: (dateString: string, formatString: string, referenceDate: Date) => Date;
+  startOfWeek: typeof startOfWeek;
+  getDay: (date: Date, options?: GetDayOptions) => number;
+  locales: { 'en-CA': typeof enCA };
+}
 
 const locales = {
   'en-CA': enCA,
 }
 
-const localizer = dateFnsLocalizer({
+const localizer: Localizer = {
   format,
   parse,
   startOfWeek,
-  getDay,
+  getDay: (date: Date, options?: GetDayOptions) => 
+    getDay(date, options),
   locales,
-})
+}
 
 // Booking validation schema
 const BookingSchema = Yup.object().shape({
@@ -31,6 +40,7 @@ const BookingSchema = Yup.object().shape({
 
 const Booking = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+  const [selectedDateFormatted, setSelectedDateFormatted] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false)
 
   // Mock events - replace with actual booking data
@@ -54,13 +64,30 @@ const Booking = () => {
     { id: 'family', name: 'Family Session', duration: '2 hours' },
   ]
 
-  const handleSelectSlot = ({ start }: { start: Date }) => {
-    setSelectedDate(start)
+  const handleDateSelect = (date: Date) => {
+    // Use localizer to format the selected date
+    const formattedDate = localizer.format(date, 'MMMM do, yyyy', { locale: locales['en-CA'] });
+    
+    setSelectedDate(date)
+    setSelectedDateFormatted(formattedDate)
     setShowForm(true)
   }
 
+  const isDateAvailable = (date: Date) => {
+    // Use localizer to get the day of the week
+    const dayOfWeek = localizer.getDay(date);
+    
+    // Example: Disable Sundays (day 0)
+    if (dayOfWeek === 0) return false;
+
+    // Check against existing events
+    return !events.some(event => 
+      localizer.parse(event.start.toISOString(), 'yyyy-MM-dd', date) === date
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-main flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-mauve-periwinkle flex flex-col items-center">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,10 +95,10 @@ const Booking = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16 max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-gradient">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 gradient-text">
             Book Your Session
           </h1>
-          <p className="text-xl text-silver/60 max-w-2xl mx-auto">
+          <p className="text-xl text-midnight/60 max-w-2xl mx-auto">
             Choose your preferred date and time, and let's create something beautiful together.
           </p>
         </motion.div>
@@ -82,18 +109,12 @@ const Booking = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-charcoal/50 backdrop-blur-sm rounded-lg p-6"
+            className="w-full"
           >
-            <Calendar
-              localizer={localizer}
+            <CustomCalendar 
               events={events}
-              startAccessor="start"
-              endAccessor="end"
-              style={{ height: 500 }}
-              className="booking-calendar"
-              onSelectSlot={handleSelectSlot}
-              selectable
-              views={['month']}
+              onDateSelect={handleDateSelect}
+              isDateAvailable={isDateAvailable}
             />
           </motion.div>
 
@@ -103,10 +124,10 @@ const Booking = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-charcoal/50 backdrop-blur-sm rounded-lg p-6"
+              className="bg-pastel-sky/20 backdrop-blur-sm rounded-2xl p-6 border border-pastel-lilac/30 shadow-floating"
             >
               <h2 className="text-2xl font-serif font-semibold mb-6 text-copper">
-                Session Details
+                {selectedDateFormatted ? `Session Details for ${selectedDateFormatted}` : 'Select a Date'}
               </h2>
               
               <Formik
@@ -129,10 +150,10 @@ const Booking = () => {
                 {({ errors, touched, isSubmitting }) => (
                   <Form className="space-y-6">
                     <div>
-                      <label className="block text-silver mb-2">Name</label>
+                      <label className="block text-midnight/80 mb-2">Name</label>
                       <Field
                         name="name"
-                        className="w-full px-4 py-2 rounded-md bg-midnight border border-border/40 text-silver focus:border-copper outline-none"
+                        className="w-full px-4 py-2 rounded-2xl bg-pastel-lilac/20 border border-pastel-lilac/30 text-midnight focus:border-copper outline-none"
                       />
                       {errors.name && touched.name && (
                         <div className="text-red-500 mt-1">{errors.name}</div>
@@ -140,11 +161,11 @@ const Booking = () => {
                     </div>
 
                     <div>
-                      <label className="block text-silver mb-2">Email</label>
+                      <label className="block text-midnight/80 mb-2">Email</label>
                       <Field
                         name="email"
                         type="email"
-                        className="w-full px-4 py-2 rounded-md bg-midnight border border-border/40 text-silver focus:border-copper outline-none"
+                        className="w-full px-4 py-2 rounded-2xl bg-pastel-lilac/20 border border-pastel-lilac/30 text-midnight focus:border-copper outline-none"
                       />
                       {errors.email && touched.email && (
                         <div className="text-red-500 mt-1">{errors.email}</div>
@@ -152,10 +173,10 @@ const Booking = () => {
                     </div>
 
                     <div>
-                      <label className="block text-silver mb-2">Phone</label>
+                      <label className="block text-midnight/80 mb-2">Phone</label>
                       <Field
                         name="phone"
-                        className="w-full px-4 py-2 rounded-md bg-midnight border border-border/40 text-silver focus:border-copper outline-none"
+                        className="w-full px-4 py-2 rounded-2xl bg-pastel-lilac/20 border border-pastel-lilac/30 text-midnight focus:border-copper outline-none"
                       />
                       {errors.phone && touched.phone && (
                         <div className="text-red-500 mt-1">{errors.phone}</div>
@@ -163,11 +184,11 @@ const Booking = () => {
                     </div>
 
                     <div>
-                      <label className="block text-silver mb-2">Session Type</label>
+                      <label className="block text-midnight/80 mb-2">Session Type</label>
                       <Field
                         as="select"
                         name="sessionType"
-                        className="w-full px-4 py-2 rounded-md bg-midnight border border-border/40 text-silver focus:border-copper outline-none"
+                        className="w-full px-4 py-2 rounded-2xl bg-pastel-lilac/20 border border-pastel-lilac/30 text-midnight focus:border-copper outline-none"
                       >
                         <option value="">Select a session type</option>
                         {sessionTypes.map((type) => (
@@ -182,19 +203,19 @@ const Booking = () => {
                     </div>
 
                     <div>
-                      <label className="block text-silver mb-2">Message (Optional)</label>
+                      <label className="block text-midnight/80 mb-2">Message (Optional)</label>
                       <Field
                         as="textarea"
                         name="message"
                         rows={4}
-                        className="w-full px-4 py-2 rounded-md bg-midnight border border-border/40 text-silver focus:border-copper outline-none resize-none"
+                        className="w-full px-4 py-2 rounded-2xl bg-pastel-lilac/20 border border-pastel-lilac/30 text-midnight focus:border-copper outline-none resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full px-6 py-3 hover-metallic rounded-md text-midnight font-medium transition-all disabled:opacity-50"
+                      className="w-full px-6 py-3 bg-copper text-white rounded-2xl hover:bg-copper/90 transition-all disabled:opacity-50 shadow-floating"
                     >
                       {isSubmitting ? 'Submitting...' : 'Book Session'}
                     </button>

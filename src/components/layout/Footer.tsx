@@ -11,8 +11,8 @@ const Footer = () => {
     {
       title: 'Contact',
       content: [
-        { text: 'Email: andy@andyphotography.com' },
-        { text: 'Phone: (555) 123-4567' },
+        { text: 'Email: Erin@erinsphotography.com' },
+        { text: 'Phone: (519) 123-4567' },
       ]
     },
     {
@@ -32,22 +32,25 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="w-full bg-midnight/95 border-t border-border/40">
-      <div className="max-w-screen-xl mx-auto px-4 py-8">
+    <motion.footer
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full bg-gradient-to-br from-pastel-sky/20 to-pastel-periwinkle/20 border-t border-border/20"
+    >
+      <div className="max-w-screen-xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="md:col-span-1">
-            <motion.h2 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-2xl font-serif font-bold text-gradient mb-4"
-            >
-              Andy's
-              <span className="text-silver/60 ml-2 text-sm uppercase tracking-widest block mt-1">
+            <div className="flex items-center mb-4">
+              <h2 className="text-2xl font-serif font-bold text-midnight mr-2">
+                Erin's
+              </h2>
+              <span className="text-copper/80 text-sm uppercase tracking-widest">
                 Photography
               </span>
-            </motion.h2>
-            <p className="text-silver/60 text-sm mt-4">
+            </div>
+            <p className="text-midnight/60 text-sm mt-4">
               Capturing life's precious moments with artistic vision and technical excellence.
             </p>
           </div>
@@ -55,12 +58,12 @@ const Footer = () => {
           {/* Info Sections */}
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-lg font-serif font-semibold mb-4 text-copper">
+              <h3 className="text-lg font-serif font-semibold mb-4 text-midnight">
                 {section.title}
               </h3>
               <ul className="space-y-2">
                 {section.content.map((item, index) => (
-                  <li key={index} className="text-silver/60 text-sm hover:text-silver transition-colors">
+                  <li key={index} className="text-midnight/60 text-sm hover:text-copper transition-colors">
                     {item.text}
                   </li>
                 ))}
@@ -70,20 +73,23 @@ const Footer = () => {
         </div>
 
         {/* Social Links */}
-        <div className="mt-12 pt-8 border-t border-border/40">
+        <div className="mt-12 pt-8 border-t border-border/20">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex space-x-6 mb-4 md:mb-0">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.url}
-                  className="text-silver/60 hover:text-copper transition-colors"
-                  aria-label={social.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-midnight/60 hover:text-copper transition-colors"
                 >
-                  <svg
-                    className="h-6 w-6 fill-current"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor"
                   >
                     <path d={social.icon} />
                   </svg>
@@ -91,20 +97,20 @@ const Footer = () => {
               ))}
             </div>
             <div className="flex flex-col items-end">
-              <p className="text-silver/40 text-sm">
-                &copy; {new Date().getFullYear()} Andy Photography. All rights reserved.
+              <p className="text-midnight/60 text-sm">
+                &copy; {new Date().getFullYear()} Erin's Photography. All Rights Reserved.
               </p>
-              <p className="text-xs text-silver/40 mt-1">
+              <p className="text-xs text-midnight/40 mt-1">
                 Powered by{' '}
                 <span className="text-copper/80 hover:text-copper transition-colors">
-                  Intellisync Solutions
+                  IntelliSync Solutions
                 </span>
               </p>
             </div>
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
 

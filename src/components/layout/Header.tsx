@@ -11,7 +11,7 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-gradient"
           >
-            Andy's
+            Erin's
           </motion.span>
           <motion.span
             initial={{ opacity: 0, y: 20 }}

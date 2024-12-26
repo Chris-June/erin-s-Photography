@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 
 interface SEOProps {
   title?: string;
@@ -9,16 +10,28 @@ interface SEOProps {
 }
 
 const SEO = ({ 
-  title = "Andy Photography - Professional Photography Services",
-  description = "Professional photography services specializing in weddings, portraits, and events. Capturing life's beautiful moments with artistic vision.",
-  keywords = ["photography", "photographer", "wedding photography", "portrait photography", "event photography", "professional photographer"],
+  title = "Erin Photography - Professional Photography Services",
+  description = "Erin Photography offers professional wedding, portrait, and event photography services. Capturing life's most precious moments with artistic vision and emotional depth.",
+  keywords = [
+    "Erin Photography",
+    "professional photography",
+    "wedding photography",
+    "portrait photography",
+    "event photography"
+  ],
   image = "/images/og-image.jpg",
   url = "https://home.intellisyncsolutions.io"
 }: SEOProps) => {
-  const siteTitle = `${title} | Andy Photography`;
+  const siteTitle = `${title} | Erin Photography`;
+
+  useEffect(() => {
+    document.title = title
+  }, [title])
 
   return (
-    <Helmet>
+    <Helmet
+      htmlAttributes={{ lang: 'en' }}
+    >
       {/* Basic Meta Tags */}
       <title>{siteTitle}</title>
       <meta name="description" content={description} />
@@ -31,7 +44,7 @@ const SEO = ({
       <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={`${url}${image}`} />
-      <meta property="og:site_name" content="Andy Photography" />
+      <meta property="og:site_name" content="Erin Photography" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -44,7 +57,7 @@ const SEO = ({
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />
       <meta name="theme-color" content="#000000" />
-      <meta name="author" content="Andy Photography" />
+      <meta name="author" content="Erin Photography" />
       <meta name="publisher" content="Intellisync Solutions" />
 
       {/* Language and Locale */}
@@ -63,7 +76,7 @@ const SEO = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
-          "name": "Andy Photography",
+          "name": "Erin Photography",
           "image": `${url}${image}`,
           "description": description,
           "@id": url,
@@ -95,9 +108,9 @@ const SEO = ({
             "closes": "18:00"
           },
           "sameAs": [
-            "https://www.facebook.com/andyphotography",
-            "https://www.instagram.com/andyphotography",
-            "https://twitter.com/andyphotography"
+            "https://www.facebook.com/erinphotography",
+            "https://www.instagram.com/erinphotography",
+            "https://twitter.com/erinphotography"
           ]
         })}
       </script>
