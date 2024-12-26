@@ -134,14 +134,14 @@ const Portfolio = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white"
+      className="min-h-screen bg-gradient-to-br from-pastel-mauve/20 via-pastel-periwinkle/10 to-pastel-sky/20 text-pastel-sky"
     >
       {/* Header Section */}
       <div className="w-full max-w-7xl mx-auto px-4 pt-16 pb-8">
-        <h1 className="text-4xl md:text-6xl font-cormorant text-center mb-2">
+        <h1 className="text-4xl md:text-6xl font-cormorant text-center mb-2 text-pastel-lilac">
           Portfolio
         </h1>
-        <p className="text-gray-400 text-center mb-12">
+        <p className="text-pastel-periwinkle text-center mb-12">
           Capturing moments that last forever
         </p>
       </div>
@@ -153,10 +153,10 @@ const Portfolio = () => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full transition-all duration-300 ${
+              className={`px-6 py-2 rounded-full transition-all duration-300 text-sm uppercase tracking-wider ${
                 selectedCategory === category
-                  ? 'bg-white text-black'
-                  : 'bg-transparent text-white border border-white/30 hover:border-white'
+                  ? 'bg-pastel-lilac text-white'
+                  : 'bg-transparent text-midnight border border-pastel-sky/30 hover:bg-pastel-sky/10'
               }`}
             >
               {category}
@@ -172,12 +172,16 @@ const Portfolio = () => {
 
       {/* Contact CTA */}
       <div className="w-full max-w-7xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl md:text-3xl font-cormorant mb-4">
+        <h2 className="text-2xl md:text-3xl font-cormorant mb-4 text-pastel-lilac">
           Ready to capture your special moments?
         </h2>
         <button
           onClick={openContactForm}
-          className="inline-block px-8 py-3 bg-white text-black rounded-full hover:bg-gray-200 transition-colors duration-300"
+          className="inline-block px-8 py-3 bg-pastel-lilac text-white rounded-2xl 
+            font-semibold uppercase tracking-wider
+            transition-all duration-300 
+            hover:scale-105 hover:shadow-lg hover:brightness-110
+            active:scale-95"
         >
           Get in Touch
         </button>

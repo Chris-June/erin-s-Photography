@@ -98,7 +98,7 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
   return (
     <div className="relative w-full">
       <div 
-        className="w-full bg-gradient-to-r from-midnight via-charcoal to-midnight py-12"
+        className="w-full bg-gradient-to-br from-pastel-mauve/20 via-pastel-periwinkle/10 to-pastel-blush/20 py-12"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -120,7 +120,7 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
                   className="relative flex-shrink-0 group"
                   style={{ width: `${slideWidth - gap}px` }}
                 >
-                  <div className="relative overflow-hidden rounded-lg aspect-[4/5] bg-midnight/50">
+                  <div className="relative overflow-hidden rounded-lg aspect-[4/5] bg-pastel-sky/20">
                     <img
                       src={image.url}
                       alt={image.alt}
@@ -128,8 +128,8 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute bottom-0 left-0 right-0 p-3 text-left">
-                        <p className="text-silver/80 text-xs mb-1">{image.category}</p>
-                        <p className="text-silver text-sm font-medium">{image.alt}</p>
+                        <p className="text-pastel-mauve text-xs mb-1">{image.category}</p>
+                        <p className="text-pastel-periwinkle text-sm font-medium">{image.alt}</p>
                       </div>
                     </div>
                   </div>
@@ -146,7 +146,7 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
           <button
             key={index}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex ? 'bg-silver w-4' : 'bg-silver/50'
+              index === currentIndex ? 'bg-pastel-blush w-4' : 'bg-pastel-sky/50'
             }`}
             onClick={() => handleDotClick(index)}
             aria-label={`Go to slide ${index + 1}`}
