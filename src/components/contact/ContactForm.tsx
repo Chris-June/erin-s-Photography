@@ -101,7 +101,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 bg-midnight/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
         onClick={onClose}
       >
         <motion.div
@@ -111,14 +111,14 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
           className="relative w-full max-w-lg"
           onClick={e => e.stopPropagation()}
         >
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl blur opacity-75" />
-          <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-xl">
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-pastel-lilac via-pastel-periwinkle to-pastel-sky rounded-xl blur opacity-75" />
+          <div className="relative bg-midnight/90 rounded-xl shadow-2xl">
             {/* Content Container */}
             <div className="relative">
               {/* Form Header */}
-              <div className="p-6 border-b border-white/10">
-                <h2 className="text-2xl font-cormorant text-white">Let's Create Something Beautiful</h2>
-                <p className="text-gray-400 mt-1">
+              <div className="p-6 border-b border-pastel-sky/10">
+                <h2 className="text-2xl font-cormorant text-pastel-lilac">Let's Create Something Beautiful</h2>
+                <p className="text-pastel-sky mt-1">
                   Hi there! I'm so glad you're interested in working together. Please fill out the form below and I'll get back to you personally as soon as possible. I'm really looking forward to hearing about your project and seeing how I can help.
                 </p>
               </div>
@@ -127,7 +127,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
                 {/* Name Field */}
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+                  <label htmlFor="name" className="block text-sm font-medium text-pastel-sky">
                     Name
                   </label>
                   <input
@@ -136,9 +136,9 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md bg-gray-800 border ${
-                      errors.name ? 'border-red-500' : 'border-gray-600'
-                    } text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    className={`mt-1 block w-full rounded-md bg-charcoal border ${
+                      errors.name ? 'border-red-500' : 'border-pastel-sky/30'
+                    } text-pastel-sky px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pastel-lilac`}
                     placeholder="Your full name"
                   />
                   {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
@@ -146,7 +146,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
 
                 {/* Email Field */}
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                  <label htmlFor="email" className="block text-sm font-medium text-pastel-sky">
                     Email
                   </label>
                   <input
@@ -155,9 +155,9 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md bg-gray-800 border ${
-                      errors.email ? 'border-red-500' : 'border-gray-600'
-                    } text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    className={`mt-1 block w-full rounded-md bg-charcoal border ${
+                      errors.email ? 'border-red-500' : 'border-pastel-sky/30'
+                    } text-pastel-sky px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pastel-lilac`}
                     placeholder="your@email.com"
                   />
                   {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
@@ -165,7 +165,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
 
                 {/* Phone Field */}
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300">
+                  <label htmlFor="phone" className="block text-sm font-medium text-pastel-sky">
                     Phone (Optional)
                   </label>
                   <input
@@ -174,14 +174,14 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="mt-1 block w-full rounded-md bg-gray-800 border border-gray-600 text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md bg-charcoal border border-pastel-sky/30 text-pastel-sky px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pastel-lilac"
                     placeholder="Your phone number"
                   />
                 </div>
 
                 {/* Event Type Field */}
                 <div>
-                  <label htmlFor="eventType" className="block text-sm font-medium text-gray-300">
+                  <label htmlFor="eventType" className="block text-sm font-medium text-pastel-sky">
                     Event Type
                   </label>
                   <select
@@ -189,9 +189,9 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
                     name="eventType"
                     value={formData.eventType}
                     onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md bg-gray-800 border ${
-                      errors.eventType ? 'border-red-500' : 'border-gray-600'
-                    } text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    className={`mt-1 block w-full rounded-md bg-charcoal border ${
+                      errors.eventType ? 'border-red-500' : 'border-pastel-sky/30'
+                    } text-pastel-sky px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pastel-lilac`}
                   >
                     <option value="">Select event type</option>
                     {eventTypes.map((type) => (
@@ -205,7 +205,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
 
                 {/* Budget Field */}
                 <div>
-                  <label htmlFor="budget" className="block text-sm font-medium text-gray-300">
+                  <label htmlFor="budget" className="block text-sm font-medium text-pastel-sky">
                     Budget Range
                   </label>
                   <select
@@ -213,9 +213,9 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
                     name="budget"
                     value={formData.budget}
                     onChange={handleChange}
-                    className={`mt-1 block w-full rounded-md bg-gray-800 border ${
-                      errors.budget ? 'border-red-500' : 'border-gray-600'
-                    } text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    className={`mt-1 block w-full rounded-md bg-charcoal border ${
+                      errors.budget ? 'border-red-500' : 'border-pastel-sky/30'
+                    } text-pastel-sky px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pastel-lilac`}
                   >
                     <option value="">Select your budget range</option>
                     <option value="under-1000">Under $1,000</option>
@@ -229,7 +229,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
 
                 {/* Message Field */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300">
+                  <label htmlFor="message" className="block text-sm font-medium text-pastel-sky">
                     Message
                   </label>
                   <textarea
@@ -238,9 +238,9 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
-                    className={`mt-1 block w-full rounded-md bg-gray-800 border ${
-                      errors.message ? 'border-red-500' : 'border-gray-600'
-                    } text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    className={`mt-1 block w-full rounded-md bg-charcoal border ${
+                      errors.message ? 'border-red-500' : 'border-pastel-sky/30'
+                    } text-pastel-sky px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pastel-lilac`}
                     placeholder="Tell me about your vision..."
                   />
                   {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
@@ -251,7 +251,7 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
                   <button
                     type="button"
                     onClick={onClose}
-                    className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    className="px-4 py-2 text-sm font-medium text-pastel-sky hover:text-pastel-lilac transition-colors"
                   >
                     Cancel
                   </button>
@@ -260,9 +260,9 @@ const ContactForm = ({ isOpen, onClose }: ContactFormProps) => {
                     disabled={isSubmitting}
                     className={`px-6 py-2 rounded-md text-sm font-medium text-white 
                       ${isSubmitting 
-                        ? 'bg-blue-600 cursor-not-allowed' 
-                        : 'bg-blue-500 hover:bg-blue-600'
-                      } transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+                        ? 'bg-pastel-lilac/50 cursor-not-allowed' 
+                        : 'bg-pastel-lilac hover:bg-pastel-lilac/80'
+                      } transition-colors focus:outline-none focus:ring-2 focus:ring-pastel-lilac focus:ring-offset-2`}
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>

@@ -12,6 +12,17 @@ const Pricing = () => {
         'Digital delivery',
         '1 location',
       ],
+      bgGradient: 'from-pastel-sky via-pastel-periwinkle to-pastel-mauve',
+      buttonBg: 'bg-pastel-sky',
+      cardBg: 'bg-midnight/80',
+      textColors: {
+        title: 'text-pastel-sky',
+        price: 'text-pastel-periwinkle',
+        features: 'text-pastel-sky',
+        icon: 'text-pastel-sky',
+        button: 'text-white',
+      },
+      borderColor: 'border-pastel-sky/30',
     },
     {
       name: 'Premium',
@@ -23,6 +34,17 @@ const Pricing = () => {
         '2 locations',
         'Printed photo album',
       ],
+      bgGradient: 'from-pastel-blush via-pastel-lilac to-pastel-sky',
+      buttonBg: 'bg-pastel-lilac',
+      cardBg: 'bg-midnight/80',
+      textColors: {
+        title: 'text-pastel-lilac',
+        price: 'text-pastel-blush',
+        features: 'text-pastel-sky',
+        icon: 'text-pastel-lilac',
+        button: 'text-white',
+      },
+      borderColor: 'border-pastel-lilac/30',
     },
     {
       name: 'Professional',
@@ -35,13 +57,24 @@ const Pricing = () => {
         'Printed photo album',
         'Video highlights',
       ],
+      bgGradient: 'from-pastel-lilac via-pastel-blush to-pastel-periwinkle',
+      buttonBg: 'bg-pastel-blush',
+      cardBg: 'bg-midnight/80',
+      textColors: {
+        title: 'text-pastel-blush',
+        price: 'text-pastel-lilac',
+        features: 'text-pastel-sky',
+        icon: 'text-pastel-blush',
+        button: 'text-white',
+      },
+      borderColor: 'border-pastel-blush/30',
     },
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-main flex flex-col items-center">
+    <div className="min-h-screen bg-midnight/90 flex flex-col items-center">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        <h1 className="text-4xl font-bold mb-8 text-center text-white">Pricing Plans</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center text-pastel-blush">Pricing Plans</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {packages.map((pkg, index) => (
             <motion.div
@@ -53,18 +86,18 @@ const Pricing = () => {
             >
               <div className="relative">
                 {/* Gradient border effect */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300" />
+                <div className={`absolute -inset-0.5 bg-gradient-to-r ${pkg.bgGradient} rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300`} />
                 
                 {/* Card content */}
-                <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-xl p-8 h-full">
+                <div className={`relative ${pkg.cardBg} rounded-xl p-8 h-full ${pkg.borderColor} border shadow-lg`}>
                   <div className="flex flex-col h-full">
-                    <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{pkg.name}</h2>
-                    <p className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">{pkg.price}</p>
-                    <ul className="space-y-3 mb-8 text-gray-300 flex-grow">
+                    <h2 className={`text-2xl font-bold mb-4 ${pkg.textColors.title}`}>{pkg.name}</h2>
+                    <p className={`text-5xl font-bold mb-6 ${pkg.textColors.price}`}>{pkg.price}</p>
+                    <ul className={`space-y-3 mb-8 ${pkg.textColors.features} flex-grow`}>
                       {pkg.features.map((feature) => (
                         <li key={feature} className="flex items-center">
                           <svg
-                            className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0"
+                            className={`w-5 h-5 ${pkg.textColors.icon} mr-2 flex-shrink-0`}
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -82,7 +115,11 @@ const Pricing = () => {
                     </ul>
                     <Link
                       to="/booking"
-                      className="block w-full text-center px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 hover:scale-[1.02] transform"
+                      className={`block w-full text-center px-6 py-3 ${pkg.buttonBg} ${pkg.textColors.button} rounded-2xl font-semibold 
+                        transition-all duration-300 
+                        hover:scale-105 hover:shadow-lg hover:brightness-110
+                        active:scale-95
+                        transform`}
                     >
                       Book Now
                     </Link>
